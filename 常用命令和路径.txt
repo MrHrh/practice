@@ -1,0 +1,112 @@
+免密拉取，推送
+执行该命令后只用第一次拉取或推送时输入密码，就会将账号和密码持久保存，不用再次输入
+git config --global credential.helper store
+
+记得要先拉取云端，再提交，最后推送！！！！
+
+
+从远程服务器发送文件到本地路径
+scp -p root@10.110.128.240:/mnt/setup/Anaconda3-5.0.1-Linux-x86_64.sh ./
+
+从本地发送到远程服务器指定路径
+scp -p Anaconda3-5.0.1-Linux-x86_64.sh root@10.110.128.240:`pwd`/
+
+建立一个软连接
+ln -s /root/anaconda3/bin/python3.6 /usr/bin/python3.6
+       文件所在路径						链接路径
+建立硬链接
+去掉 -s参数
+
+pip使用
+pip install name 安装函数库
+pip install -upgrade pip 更新pip
+
+从指定网址下载文件
+wget http://www.vdberg.org/~richard/tcpping
+
+
+从桌面上传文件到服务器
+rz+filename
+下载文件
+sz+filename
+安装
+yum -y install lrzsz
+
+
+解压文件到指定目录
+ tar -xzvf paping_1.5.5_x86-64_linux.tar.gz -C /mnt/setup/
+ 
+ 查看内核版本信息
+ uname -a
+
+终端打印绿色
+\033[32m [ok] \033[0m
+
+批量删除ssh规则
+a=`iptables -L  | grep "ssh" | wc -l`;let b=$a-1;echo $b;for((i=0;i<$b;i++));do iptables -D INPUT -p tcp --dport 22 -j ACCEPT;done;
+
+
+终止程序并且将执行结果保存
+ps auxf | grep top | grep -vE "grep|python" | xargs -I {} kill {}
+
+定时器
+timeout_decorator
+
+netstat遗留
+netstat -o keepalive三个值（完成）
+netstat 能够通过inode节点号找到socket,确认一下inode获取的部分原理
+
+rpm包安装命令
+rpm -ivh filename
+
+编码格式windows转unix命令
+	dos2unix filename
+	
+获取时间戳（import datetime）	
+datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+
+shell过滤方法
+-v表示过滤掉后面的信息
+-E表示只输出这些信息
+netstat -natp4 | grep -vE "Active|Proto"
+
+文件写入是append模式
+文件加入header
+','.join(['1','2','3'])
+if True:删掉，没有这种写法，只有while True
+并集用‘|’
+异常值判断
+','.join(line.split(',')[2:])
+
+pycharm注册码
+https://blog.csdn.net/weixin_43641304/article/details/87071864
+
+
+ python创建目录
+ 1.os.mkdir(pathname)(创建单个目录)
+ 2.os.makedirs(pathname)(创建多级目录)
+ 3.os.mknod(filename)(创建空文件)
+ 
+ ls -rt log/CentOS_10.110.128.103_uping_debug_2019_* | tail -n 1 | xargs -I {} cat {} | grep send
+ 
+代码思路的合理性，函数的通用性，开始写之前先有一个好的想法，事半功倍
+
+比xshell更好用、更好看的工具:cygwin
+
+将字符串按照指定的字符分隔成列表
+split();splitline();splitlines()
+
+re库的简单正则匹配
+ new_list.append(re.sub(',ms|=|:|,,', '', line).split(','))
+ 
+shell正则匹配
+ping -c 1 10.210.195.1 | grep -vE "PING|---|min|transmitted|^$"
+
+函数/变量命名
+https://unbug.github.io/codelf/#%E5%85%83%E7%BB%84
+
+pchar命令
+http://manpages.ubuntu.com/manpages/cosmic/man8/pchar.8.html
+
+ipmitool -I open chassis status
+dmidecode

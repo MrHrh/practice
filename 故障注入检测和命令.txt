@@ -1,0 +1,130 @@
+1.路由信息
+	snmp查看命令：snmpwalk -v2c -c public localhost 1.3.6.1.2.1.4.21（iP路由表）
+	mtr查看：mtr 10.110.128.100 -o LDRSNBAWVGJMXI
+	traceroute查看：traceroute 10.110.128.100
+
+2.时延
+	注入故障命令：tc qdisc add dev eth0 root netem delay 100ms
+	   
+	ping测试命令：ping 10.110.128.100
+	traceroute测试命令：traceroute 10.110.128.100
+	paping测试命令：paping 10.110.128.100 -p 22
+	tcpping测试命令：tcpping 10.110.128.100
+	ss测试命令：ss -nti
+	mtr测试命令：mtr 10.110.128.100 -o LDRSNBAWV
+	
+2.丢包
+	注入故障命令：tc qdisc hange dev eth0 root netem loss10%
+	
+	snmp测试命令：snmpwalk -v2c -c public localhost 1.3.6.1.2.1.5.15（没有发送成功的icmp报文个数）
+	nicstat测试命令：nicstat -t 1
+	mtr测试命令：mtr 10.110.128.100 -o LDRSNBAWV
+	paping测试命令：paping 10.110.128.100 -p 22
+	tcpping测试命令：tcpping 10.110.128.100
+	ping测试命令：ping 10.110.128.100
+	tcpdump测试命令：tcpdump -i bvsc2987da.1 host 10.110.128.128 and host 10.110.128.100
+	netstat测试命令：netstat -s
+	
+3.连通性
+	mtr测试命令：mtr 10.110.128.100 -o LDRSNBAWV
+	paping测试命令：paping 10.110.128.100 -p 22
+	tcpping测试命令：tcpping 10.110.128.100
+	ping测试命令：ping 10.110.128.100
+	traceroute测试命令：traceroute 10.110.128.100
+	
+4.包重复
+	注入故障命令：tc qdisc change dev eth0 root netem duplicate 10%
+	
+	tcpdump测试命令：tcpdump -i bvsc2987da.1 host 10.110.128.128 and host 10.110.128.100
+	ping测试命令：ping 10.110.128.100
+	snmp测试命令：snmpwalk -v2c -c public localhost 1.3.6.1.2.1.6.12
+	
+5.ip头部/tcp头部
+
+	tcpdump测试命令：tcpdump -i bvsc2987da.1 host 10.110.128.128 and host 10.110.128.100 -vv
+	ss测试命令：ss -nti（仅tcp）
+
+6.tcp连接状态
+	ss -nti
+	netstat -t
+
+7.防火墙策略
+	iptables查看：iptables -L
+	
+	ping测试命令：ping 10.110.128.100
+	traceroute测试命令：traceroute 10.110.128.100
+	paping测试命令：paping 10.110.128.100 -p 22
+	tcpping测试命令：tcpping 10.110.128.100
+
+8.慢启动阈值
+	ss查看：ss -nti
+
+9.发送/接收的数据包数量
+	iptraf-ng测试命令：iptraf-ng -d ens18
+	mtr测试命令：mtr 10.110.128.100 -o LDRSNBAWV
+	paping测试命令：paping 10.110.128.100 -p 22
+	tcpping测试命令：tcpping 10.110.128.100
+	ping测试命令：ping 10.110.128.100
+	
+10.发送/接收的字节数
+	iptraf-ng测试命令：iptraf-ng -d ens18
+	netstat -s
+	nicstat 1
+	
+11.发送/接收错误的包数
+	netstat -s
+	
+12.滑动窗口大小
+	tcpdump查看：tcpdump -i bvsc2987da.1 host 10.110.128.128 and host 10.110.128.100 -vv
+	ss查看：ss -nti
+	
+13.网口速率
+	ss查看：ss -nti
+	iptraf-ng测试命令：iptraf-ng -d ens18
+	
+14.接口利用率
+	nicstat 1
+	snmp：（找到指定网卡的各项信息）
+		snmpwalk -v2c -c public localhost .1.3.6.1.2.1.2.2.1.2（接口编号）
+		snmpwalk -v2c -c public localhost .1.3.6.1.2.1.2.2.1.5（接口带宽估计值）
+		snmpwalk -v2c -c public localhost .1.3.6.1.2.1.2.2.1.10（接口入方向通过的字节数）
+		snmpwalk -v2c -c public localhost .1.3.6.1.2.1.2.2.1.16（接口出方向通过的字节数）
+		snmpwalk -v2c -c public localhost .1.3.6.1.2.1.1.3.0（系统网络管理部分运行的时间）
+		
+		再根据公式计算
+	
+15.IP校验和错误
+	iptraf-ng测试命令：iptraf-ng -d ens18 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
